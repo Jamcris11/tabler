@@ -6,6 +6,19 @@
 #define VERSION "1.0"
 #define BUFSIZE 128
 
+#ifdef WIN32
+
+#include <io.h>
+
+#define R_OK 0
+#define access _access
+
+#else
+
+#include <unistd.h>
+
+#endif
+
 int find_first(char* buf, int n);
 void print_match(FILE* f, const char* arg);
 
@@ -63,6 +76,11 @@ main(int argc, char* argv[])
 
 	if ( argc == 2 && !strcmp("-h", argv[1]) || argc == 1 ) {
 		printf("usage: tabler filename [patterns...]\n");
+		exit(-1);
+	}
+
+	if ( access(argv[1], R_OK) ) {
+		printf("file doesn't exist or you do not have the permissions to read...\n");
 		exit(-1);
 	}
 
