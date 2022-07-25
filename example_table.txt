@@ -1,0 +1,4 @@
+yt	www.youtube.co.uk
+g	www.4chan.org/g
+google	www.google.co.uk
+jc	jimscorner.co.uk
